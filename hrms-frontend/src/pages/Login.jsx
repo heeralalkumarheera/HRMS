@@ -6,6 +6,7 @@ import Button from '../components/common/Button'
 import Input from '../components/common/Input'
 import { APP_NAME } from '../utils/constants'
 import { useAuth } from '../hooks/useAuth'
+import { getRoleHomePath } from '../utils/auth'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -25,11 +26,9 @@ export default function Login() {
     setLoading(true)
 
     try {
-      // Login with email + password only
-      // Backend will return { token, user: { id, name, email, role } }
-      await login(form.email, form.password)
+      const user = await login(form.email, form.password)
       toast.success('Login successful')
-      navigate('/dashboard')
+      navigate(getRoleHomePath(user?.role), { replace: true })
     } catch (error) {
       toast.error(error.message || 'Unable to login')
     } finally {

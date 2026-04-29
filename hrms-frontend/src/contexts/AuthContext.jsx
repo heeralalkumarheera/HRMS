@@ -13,8 +13,8 @@ export function AuthProvider({ children }) {
     setLoading(false)
   }, [])
 
-  const login = async (email, password, role) => {
-    const response = await authService.login(email, password, role)
+  const login = async (email, password) => {
+    const response = await authService.login(email, password)
     setUser(response.user)
     return response.user
   }

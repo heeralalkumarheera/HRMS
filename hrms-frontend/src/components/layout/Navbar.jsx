@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import Button from '../common/Button'
 import { useAuth } from '../../hooks/useAuth'
+import { getRoleLabel } from '../../utils/auth'
 
 export default function Navbar() {
   const { user, logout } = useAuth()
@@ -24,7 +25,7 @@ export default function Navbar() {
           <p className="text-xs uppercase tracking-[0.18em] text-blue-600">Broker Command Center</p>
           <h2 className="text-base font-semibold text-slate-900 md:text-lg">
             {user?.name || 'User'}
-            <span className="ml-2 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">{user?.role || 'employee'}</span>
+            <span className="ml-2 rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">{getRoleLabel(user?.role)}</span>
           </h2>
           <p className="mt-1 text-xs text-slate-600">{today}</p>
         </div>
